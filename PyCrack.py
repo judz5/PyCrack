@@ -1,4 +1,4 @@
-import getopt, sys
+import getopt, sys, hashlib
 
 mode = ""
 attack = ""
@@ -18,14 +18,21 @@ def setAttack(attackSet, file):
         dictFile = file
         print("Dictionary File : %s" % dictFile)
 
+def checkMode(test):
+    global mode
+    if test == mode:
+        return True
+    else:
+        return False
+
 # Remove 1st argument from the
 # list of command line arguments
 argumentList = sys.argv[2:]
 
-options = "pmcsbd:"
+options = "pmsbd:"
 
 pw = sys.argv[1]
-if pw in ['-p','-m', '-c', '-s', '-b', '-d']:
+if pw in ['-p','-m','-s', '-b', '-d']:
     print("No Password Given To Crack!")
     quit()
 
@@ -44,9 +51,6 @@ try:
         elif currentArgument in ("-m"):
             setMode("MD5")
              
-        elif currentArgument in ("-c"):
-            setMode("BCrypt")
-        
         elif currentArgument in ("-s"):
             setMode("SHA-256")
 
@@ -68,5 +72,20 @@ if not(len(attack)>0):
     print("***** No Attack Setting Detected, Defaulting to Brute Force ******")
     setAttack("Brute Force", "")
 
+if(attack == "Dictionary"):
+    with open(dictFile) as pwList:
+        for line in pwList:
+            print(line)
+            if checkMode("MD5"):
+                hashLine = hashlib.md5(line)
+            if checkMode("SHA-256"):
+                hashLine = hashlib.sha256(line)
+            if(hashLine == pw):
+                print("Cracked! Password is : %s" % line)
+                quit()
+                
 
+    
+    
+        
     
