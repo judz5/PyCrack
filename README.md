@@ -11,23 +11,31 @@ Dictionary Attack option (10)
 Command line arguments can be taken in (10)
 
 
--p --plain = Plain Text
--m --md5 = MD5 Hashed
--c --crypt = BCrypt Hashed
--s --sha256 = sha256 hashed
+    -p --plain = Plain Text
 
--b --brute = brute force
--d --dict = dictionary attack
+    -m --md5 = MD5 Hashed
 
--i --input = File to inport passwords from
--o --output = file to output cracked password too
+    -c --crypt = BCrypt Hashed
 
-formating -----
-    Python3 PyCrack someMd5 -m -b (Brute Force it)
-    Python3 PyCrack SomeCrypt -c -d RockYou.txt
-    Python3 PyCrack -i someList -o output.txt -d rockYou.txt
+    -s --sha256 = sha256 hashed
 
-what we gotta do -----
+
+    -b --brute = brute force
+
+    -d --dict = dictionary attack
+    
+
+    -i --input = File to inport passwords from
+
+    -o --output = file to output cracked password too
+
+### Formating
+
+    - Python3 PyCrack someMd5 -m -b (Brute Force it)
+    - Python3 PyCrack SomeCrypt -c -d RockYou.txt
+    - Python3 PyCrack -i someList -o output.txt -d rockYou.txt
+
+### Plans 
 
 make function that can create hash quickly for the dictionary word depending on what their choice was
 (I.e if they said sha256 then it should know to convert each thing to sha256 vise versa)
