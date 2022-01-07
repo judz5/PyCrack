@@ -13,41 +13,47 @@ def setMode(modeSet):
 def setAttack(attackSet, file):
     global attack, dictFile
     attack = attackSet
-    print("Method Set to : %s" % attackSet)
+    print("Attack Method Set to : %s" % attackSet)
     if(attack == "Dictionary"):
         dictFile = file
         print("Dictionary File : %s" % dictFile)
 
 # Remove 1st argument from the
 # list of command line arguments
-argumentList = sys.argv[1:]
-# Options
+argumentList = sys.argv[2:]
+
 options = "pmcsbd:"
-long_options = ["plain", "md5", "crypt", "sha256", 'brute', 'dict']
- 
+
+pw = sys.argv[1]
+if pw in ['-p','-m', '-c', '-s', '-b', '-d']:
+    print("No Password Given To Crack!")
+    quit()
+
+print("Attemping to Crack : %s" % pw)
+
 try:
     # Parsing argument
-    arguments, values = getopt.getopt(argumentList, options, long_options)
+    arguments, values = getopt.getopt(argumentList, options)
      
     # checking each argument
     for currentArgument, currentValue in arguments:
  
-        if currentArgument in ("-p", "--plain"):
+        if currentArgument in ("-p"):
             setMode("PlainText")
              
-        elif currentArgument in ("-m", "--md5"):
+        elif currentArgument in ("-m"):
             setMode("MD5")
              
-        elif currentArgument in ("-c", "--crypt"):
+        elif currentArgument in ("-c"):
             setMode("BCrypt")
         
-        elif currentArgument in ("-s", "--sha256"):
+        elif currentArgument in ("-s"):
             setMode("SHA-256")
 
-        elif currentArgument in ("-b", "--brute"):
+        elif currentArgument in ("-b"):
             setAttack("Brute Force", "")
 
-        elif currentArgument in ("-d", "--dict"):
+        elif currentArgument in ("-d"):
             #print ("Dictionary file Name: ", sys.argv[sys.argv.index("-d")+1])  
             setAttack("Dictionary", sys.argv[sys.argv.index("-d")+1])
              
@@ -58,6 +64,9 @@ except getopt.error as err:
 if not(len(mode)>0):
     print("***** No Mode Detected, Please Retry And Enter a Mode Argument ******")
     quit()
+if not(len(attack)>0):
+    print("***** No Attack Setting Detected, Defaulting to Brute Force ******")
+    setAttack("Brute Force", "")
 
-print("why am i here")
+
     
