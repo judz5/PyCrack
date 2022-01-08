@@ -5,6 +5,8 @@ attack = ""
 
 dictFile = ""
 
+longEnabled = False
+
 def setMode(modeSet):
     global mode
     mode = modeSet
@@ -29,10 +31,10 @@ def checkMode(test):
 # list of command line arguments
 argumentList = sys.argv[2:]
 
-options = "pmsbd:"
+options = "pmsbd:l"
 
 pw = sys.argv[1]
-if pw in ['-p','-m','-s', '-b', '-d']:
+if pw in ['-p','-m','-s', '-b', '-d', '-l']:
     print("No Password Given To Crack!")
     quit()
 
@@ -57,6 +59,10 @@ try:
         elif currentArgument in ("-b"):
             setAttack("Brute Force", "")
 
+        elif currentArgument in ("-l"):
+            longEnabled = True
+            print("Test Output Enabled")
+
         elif currentArgument in ("-d"):
             #print ("Dictionary file Name: ", sys.argv[sys.argv.index("-d")+1])  
             setAttack("Dictionary", sys.argv[sys.argv.index("-d")+1])
@@ -72,20 +78,24 @@ if not(len(attack)>0):
     print("***** No Attack Setting Detected, Defaulting to Brute Force ******")
     setAttack("Brute Force", "")
 
+print("\n")
+
 if(attack == "Dictionary"):
     with open(dictFile) as pwList:
         for line in pwList:
-            print(line)
-            if checkMode("MD5"):
-                hashLine = hashlib.md5(line)
-            if checkMode("SHA-256"):
-                hashLine = hashlib.sha256(line)
-            if(hashLine == pw):
-                print("Cracked! Password is : %s" % line)
-                quit()
-                
-
-    
-    
+            l = line.rstrip().encode('utf-8')
         
+            if checkMode("MD5"):
+                hashLine = hashlib.md5(l)
+            elif checkMode("SHA-256"):
+                hashLine = hashlib.sha256(l)
+            
+            if(longEnabled):
+                print("Currently Checking : %s" % line.rstrip())
+
+            if(hashLine.hexdigest() == pw):
+                print("\nCracked! Password is : %s" % line)
+                quit()
+
+
     
