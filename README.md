@@ -5,7 +5,7 @@ Python Password Cracker
 ### Rubric (50/50)
 
 - [x] Top 10,000 most common passwords can be cracked
-- [ ] Plain-text passwords can be checked (10)
+- [x] Plain-text passwords can be checked (10)
 - [x] MD5 hashed passwords can be checked (10)
 - [ ] BCrypt hashed passwords can be checked (10)
 - [x] SHA-256 hashed passwords can be checked (10)
