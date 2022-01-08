@@ -1,4 +1,6 @@
-import getopt, sys, hashlib
+import getopt, sys, hashlib, time
+
+start_time = time.time()
 
 mode = ""
 attack = ""
@@ -80,22 +82,29 @@ if not(len(attack)>0):
 
 print("\n")
 
-if(attack == "Dictionary"):
-    with open(dictFile) as pwList:
-        for line in pwList:
-            l = line.rstrip().encode('utf-8')
-        
-            if checkMode("MD5"):
-                hashLine = hashlib.md5(l)
-            elif checkMode("SHA-256"):
-                hashLine = hashlib.sha256(l)
-            
-            if(longEnabled):
-                print("Currently Checking : %s" % line.rstrip())
+count = 0
 
-            if(hashLine.hexdigest() == pw):
-                print("\nCracked! Password is : %s" % line)
-                quit()
+if(attack == "Dictionary"):
+    f = open(dictFile)
+    
+    for line in f:
+        l = line.rstrip().encode('utf-8')
+        
+        if checkMode("MD5"):
+            hashLine = hashlib.md5(l)
+        elif checkMode("SHA-256"):
+            hashLine = hashlib.sha256(l)
+            
+        if(longEnabled):
+            print("Currently Checking : %s" % line.rstrip())
+
+        count = count + 1
+
+        if(hashLine.hexdigest() == pw):
+            print("--- %s Attempts ---" % count) 
+            print("--- %s seconds ---" % (time.time() - start_time))
+            print("Password is : %s" % line)
+            quit()
 
 
     
