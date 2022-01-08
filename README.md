@@ -22,14 +22,14 @@ Python Password Cracker
         -s --sha256 = sha256 hashed
 
 
-        -b --brute = brute force
+        -b --brute = brute force *** Not Implemented ***
 
         -d --dict = dictionary attack
 
 
-        -i --input = File to inport passwords from *W.I.P*
+        -i --input = File to inport passwords from *** Not Implemented ***
 
-        -o --output = file to output cracked password too *W.I.P*
+        -o --output = file to output cracked password too *** Not Implemented ***
 
 ### Formating
 
