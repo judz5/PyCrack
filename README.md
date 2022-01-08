@@ -37,4 +37,10 @@ Python Password Cracker
     - Python3 PyCrack 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 -s -d RockYou.txt
     - Python3 PyCrack -i passwords.txt -o output.txt -d rockYou.txt
 
+### Bug
+
+If you want to use the rockyou.txt dictionary, you have to re-encode it to UTF-8 As there is formatting errors in the file.
+
+        iconv -f ISO-8859-1 -t UTF-8 rockyou.txt > rockyou_utf8.txt
+
 
