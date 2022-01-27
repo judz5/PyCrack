@@ -92,19 +92,21 @@ if(attack == "Dictionary"):
         
         if checkMode("MD5"):
             hashLine = hashlib.md5(l)
+            check = hashLine.hexdigest()
         elif checkMode("SHA-256"):
             hashLine = hashlib.sha256(l)
-            
+            check = hashLine.hexdigest()
+        elif checkMode("PlainText"):
+            check = line.rstrip()
         if(longEnabled):
             print("Currently Checking : %s" % line.rstrip())
 
         count = count + 1
-
-        if(hashLine.hexdigest() == pw):
+        if(check == pw):
             print("--- %s Attempts ---" % count) 
             print("--- %s seconds ---" % (time.time() - start_time))
-            print("Password is : %s" % line)
+            print("--- Password is :",pw,"---")
             quit()
 
+print("Password Not Found in Dictionary")
 
-    
