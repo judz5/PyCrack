@@ -1,6 +1,4 @@
-import getopt, sys, hashlib, time
-
-start_time = time.time()
+import getopt, sys, hashlib, time, multiprocessing
 
 mode = ""
 attack = ""
@@ -12,15 +10,26 @@ longEnabled = False
 def setMode(modeSet):
     global mode
     mode = modeSet
-    print("Mode Set To : %s" % mode)
+    word = ("Mode : %s" % mode)
+    for w in word:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
 
 def setAttack(attackSet, file):
     global attack, dictFile
     attack = attackSet
-    print("Attack Method Set to : %s" % attackSet)
+    word = ("Method : %s" % attackSet)
     if(attack == "Dictionary"):
         dictFile = file
-        print("Dictionary File : %s" % dictFile)
+        word = ("Dictionary File : %s" % dictFile)
+    word = word.center(25)
+    for w in word:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
 
 def checkMode(test):
     global mode
@@ -28,6 +37,20 @@ def checkMode(test):
         return True
     else:
         return False
+
+def loading():
+    global notcomplete
+    animation = ["■□□□□□□□□□","■■□□□□□□□□", "■■■□□□□□□□", "■■■■□□□□□□", "■■■■■□□□□□", "■■■■■■□□□□", "■■■■■■■□□□", "■■■■■■■■□□", "■■■■■■■■■□", "■■■■■■■■■■"]
+
+    i = 0
+    while True:
+        time.sleep(0.1)
+        sys.stdout.write("\r" + animation[i % len(animation)])
+        sys.stdout.flush()
+        i += 1
+
+    print("\n")
+    
 
 # Remove 1st argument from the
 # list of command line arguments
@@ -40,7 +63,26 @@ if pw in ['-p','-m','-s', '-b', '-d', '-l']:
     print("No Password Given To Crack!")
     quit()
 
-print("Attemping to Crack : %s" % pw)
+print(""" ██▓███ ▓██   ██▓ ▄████▄   ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
+▓██░  ██▒▒██  ██▒▒██▀ ▀█  ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
+▓██░ ██▓▒ ▒██ ██░▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ 
+▒██▄█▓▒ ▒ ░ ▐██▓░▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ 
+▒██▒ ░  ░ ░ ██▒▓░▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄
+▒▓▒░ ░  ░  ██▒▒▒ ░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒
+░▒ ░     ▓██ ░▒░   ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░
+░░       ▒ ▒ ░░  ░          ░░   ░   ░   ▒   ░        ░ ░░ ░ 
+         ░ ░     ░ ░         ░           ░  ░░ ░      ░  ░   
+         ░ ░     ░                           ░               
+
+""")
+
+word = ("Hash : %s" % pw)
+for w in word:
+    sys.stdout.write(w)
+    sys.stdout.flush()
+    time.sleep(.2)
+
+print("")
 
 try:
     # Parsing argument
@@ -84,9 +126,15 @@ print("\n")
 
 count = 0
 
+start_time = time.time()
+
+t = multiprocessing.Process(target=loading)
+
 if(attack == "Dictionary"):
     f = open(dictFile)
     
+    t.start()
+    print("Loading...")
     for line in f:
         l = line.rstrip().encode('utf-8')
         
@@ -103,10 +151,13 @@ if(attack == "Dictionary"):
 
         count = count + 1
         if(check == pw):
+            t.terminate()
+            print("\n")
             print("--- %s Attempts ---" % count) 
             print("--- %s seconds ---" % (time.time() - start_time))
             print("--- Password is :",pw,"---")
             quit()
-
+t.terminate()
+print("\n")
 print("Password Not Found in Dictionary")
 
