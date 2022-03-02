@@ -1,35 +1,29 @@
 import getopt, sys, hashlib, time, multiprocessing
 
 mode = ""
+modePrint = ""
 attack = ""
+attackPrint = ""
 
 dictFile = ""
+dictPrint = ""
 
 longEnabled = False
+animations = False
 
 def setMode(modeSet):
-    global mode
+    global mode, animations, modePrint
     mode = modeSet
-    word = ("Mode : %s" % mode)
-    for w in word:
-        sys.stdout.write(w)
-        sys.stdout.flush()
-        time.sleep(.2)
-    print("")
+    modePrint = ("Mode : %s" % mode)
+    
 
 def setAttack(attackSet, file):
-    global attack, dictFile
+    global attack, dictFile, animations, dictPrint, attackPrint
     attack = attackSet
-    word = ("Method : %s" % attackSet)
+    attackPrint = ("Method : %s" % attackSet)
     if(attack == "Dictionary"):
         dictFile = file
-        word = ("Dictionary File : %s" % dictFile)
-    word = word.center(25)
-    for w in word:
-        sys.stdout.write(w)
-        sys.stdout.flush()
-        time.sleep(.2)
-    print("")
+        dictPrint = ("Dictionary File : %s" % dictFile)
 
 def checkMode(test):
     global mode
@@ -56,10 +50,10 @@ def loading():
 # list of command line arguments
 argumentList = sys.argv[2:]
 
-options = "pmsbd:l"
+options = "pmsbd:la"
 
 pw = sys.argv[1]
-if pw in ['-p','-m','-s', '-b', '-d', '-l']:
+if pw in ['-p','-m','-s', '-b', '-d', '-l', '-a']:
     print("No Password Given To Crack!")
     quit()
 
@@ -75,14 +69,6 @@ print(""" ██▓███ ▓██   ██▓ ▄████▄   ██�
          ░ ░     ░                           ░               
 
 """)
-
-word = ("Hash : %s" % pw)
-for w in word:
-    sys.stdout.write(w)
-    sys.stdout.flush()
-    time.sleep(.2)
-
-print("")
 
 try:
     # Parsing argument
@@ -107,6 +93,9 @@ try:
             longEnabled = True
             print("Test Output Enabled")
 
+        elif currentArgument in ("-a"):
+            animations = True;
+
         elif currentArgument in ("-d"):
             #print ("Dictionary file Name: ", sys.argv[sys.argv.index("-d")+1])  
             setAttack("Dictionary", sys.argv[sys.argv.index("-d")+1])
@@ -114,6 +103,37 @@ try:
 except getopt.error as err:
     # output error, and return with an error code
     print (str(err))
+
+word = ("Hash : %s" % pw)
+if(animations):
+    for w in word:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
+    for w in modePrint:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
+    for w in attackPrint:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
+    for w in dictPrint:
+        sys.stdout.write(w)
+        sys.stdout.flush()
+        time.sleep(.2)
+    print("")
+else:
+    print(word)
+    print(modePrint)
+    print(attackPrint)
+    print(dictPrint)
+print("")
+
+
 
 if not(len(mode)>0):
     print("***** No Mode Detected, Please Retry And Enter a Mode Argument ******")
@@ -161,3 +181,4 @@ t.terminate()
 print("\n")
 print("Password Not Found in Dictionary")
 
+ 
