@@ -15,21 +15,23 @@ Python Password Cracker
 
 ### Command Line Arguments
 
-        -p --plain = Plain Text
+        -p = Plain Text
 
-        -m --md5 = MD5 Hashed
+        -m = MD5 Hashed
 
-        -s --sha256 = sha256 hashed
-
-
-        -b --brute = brute force *** Not Implemented ***
-
-        -d --dict = dictionary attack
+        -s = sha256 hashed
 
 
-        -i --input = File to inport passwords from *** Not Implemented ***
+        -b = brute force *** Not Implemented ***
 
-        -o --output = file to output cracked password too *** Not Implemented ***
+        -d = dictionary attack
+        
+        -a = Enable Animations
+
+
+        -i = File to inport passwords from *** Not Implemented ***
+
+        -o = file to output cracked password too *** Not Implemented ***
 
 ### Formating
 
