@@ -36,7 +36,7 @@ Python Password Cracker
 ### Formating
 
     - Python3 PyCrack 5f4dcc3b5aa765d61d8327deb882cf99 -m -b 
-    - Python3 PyCrack 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 -s -d RockYou.txt
+    - Python3 PyCrack 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 -s -d RockYou.txt -a
     - Python3 PyCrack -i passwords.txt -o output.txt -d rockYou.txt
 
 ### Bug
