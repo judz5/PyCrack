@@ -157,7 +157,7 @@ if(attack == "Dictionary"):
     print("Loading...")
     for line in f:
         l = line.rstrip().encode('utf-8')
-        
+
         if checkMode("MD5"):
             hashLine = hashlib.md5(l)
             check = hashLine.hexdigest()
@@ -175,7 +175,7 @@ if(attack == "Dictionary"):
             print("\n")
             print("--- %s Attempts ---" % count) 
             print("--- %s seconds ---" % (time.time() - start_time))
-            print("--- Password is :",pw,"---")
+            print("--- Password is :",line.rstrip(),"---")
             quit()
 t.terminate()
 print("\n")
