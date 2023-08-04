@@ -1,9 +1,17 @@
-# PyCrack
-Python Password Cracker
-2022 CSHS Cybersecurity
+        ██▓███ ▓██   ██▓ ▄████▄   ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
+        ▓██░  ██▒▒██  ██▒▒██▀ ▀█  ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
+        ▓██░ ██▓▒ ▒██ ██░▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ 
+        ▒██▄█▓▒ ▒ ░ ▐██▓░▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ 
+        ▒██▒ ░  ░ ░ ██▒▓░▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄
+        ▒▓▒░ ░  ░  ██▒▒▒ ░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒
+        ░▒ ░     ▓██ ░▒░   ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░
+        ░░       ▒ ▒ ░░  ░          ░░   ░   ░   ▒   ░        ░ ░░ ░ 
+                 ░ ░     ░ ░         ░           ░  ░░ ░      ░  ░   
+                 ░ ░     ░                           ░               
+## PyCrack, a Python Password Cracker
+### 2022 CSHS Cybersecurity
 
 ### Rubric (50/50)
-
 - [x] Top 10,000 most common passwords can be cracked
 - [x] Plain-text passwords can be checked (10)
 - [x] MD5 hashed passwords can be checked (10)
@@ -29,7 +37,7 @@ Python Password Cracker
         -a = Enable Animations
 
 
-        -i = File to inport passwords from *** Not Implemented ***
+        -i = File to inport passwords from
 
         -o = file to output cracked password too *** Not Implemented ***
 
